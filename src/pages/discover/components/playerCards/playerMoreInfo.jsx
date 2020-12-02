@@ -85,7 +85,7 @@ function PlayerMoreInfo({ playerInfo }) {
                 </div>
             </div>
             <IconButton size="large" className={classes.exitIcon}>
-                <ClearRoundedIcon size="large" color="secondary" />
+                <ClearRoundedIcon size="large" />
             </IconButton>
         </>
     )
