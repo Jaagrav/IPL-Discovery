@@ -32,6 +32,7 @@ Here's all the frameworks and libraries I used for this project:
 - [Axios](https://www.npmjs.com/package/axios)
 - [AOS](https://michalsnik.github.io/aos/)
 - [Netlify](https://netlify.com)
+- Official Cricket API by IPL20 for fetching data
 
 ## Design
 
