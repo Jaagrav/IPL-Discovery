@@ -14,9 +14,19 @@ const useStyles = makeStyles((theme) =>
             borderRadius: "5px",
             display: "grid",
             gridTemplateColumns: "291px 1fr",
+            [theme.breakpoints.down("sm")]: {
+                gridTemplateColumns: "unset",
+                gridTemplateRows: "291px 1fr",
+                width: "100%",
+                maxWidth: "100%",
+            }
         },
         playerInfo: {
             padding: "20px 30px 20px 0",
+            [theme.breakpoints.down("sm")]: {
+                padding: "20px 30px",
+                textAlign: "center",
+            }
         },
         playerName: {
             fontSize: 44,
@@ -33,6 +43,7 @@ const useStyles = makeStyles((theme) =>
         },
         playerIMG: {
             height: "100%",
+            margin: "auto",
         }
     })
 );
