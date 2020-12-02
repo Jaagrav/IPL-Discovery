@@ -12,7 +12,7 @@ const darkTheme = createMuiTheme({
     },
     text: {
       primary: "#fff",
-      hint: "#434F5B"
+      hint: "#42FB81"
     },
     background: {
       paper: "#192128"
