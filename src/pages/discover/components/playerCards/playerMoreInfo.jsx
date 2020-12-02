@@ -1,9 +1,12 @@
 import React from 'react';
 
 import {
+    IconButton,
     makeStyles,
     createStyles,
 } from "@material-ui/core";
+
+import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -44,6 +47,11 @@ const useStyles = makeStyles((theme) =>
         playerIMG: {
             height: "100%",
             margin: "auto",
+        },
+        exitIcon: {
+            position: "absolute",
+            top: "15px",
+            right: "15px",
         }
     })
 );
@@ -59,22 +67,27 @@ function PlayerMoreInfo({ playerInfo }) {
     const date = `${dateArray[1]} ${dateArray[2]}, ${dateArray[3]}`;
 
     return (
-        <div className={classes.playerMoreInfo} onClick={(e) => { e.stopPropagation(); }}>
-            <img alt={fullName} src={`https://static.iplt20.com/players/210/${id}.png`} className={classes.playerIMG} />
-            <div className={classes.playerInfo}>
-                <div className={classes.playerName}>
-                    <span className={classes.firstName}>{firstName}</span>
-                    <span className={classes.lastName}>{lastName}</span>
-                </div>
-                <div className={classes.playerOtherInfo}>
-                    <p>DOB: {date}</p>
-                    <p>Nationality: {nationality}</p>
-                    <p>Bowling Arm: {rightArmedBowl ? "Right" : "Left"}</p>
-                    <p>Batting Hand: {rightHandedBat ? "Right" : "Left"}</p>
-                    <p>Short Name: {shortName}</p>
+        <>
+            <div className={classes.playerMoreInfo} onClick={(e) => { e.stopPropagation(); }}>
+                <img alt={fullName} src={`https://static.iplt20.com/players/210/${id}.png`} className={classes.playerIMG} />
+                <div className={classes.playerInfo}>
+                    <div className={classes.playerName}>
+                        <span className={classes.firstName}>{firstName}</span>
+                        <span className={classes.lastName}>{lastName}</span>
+                    </div>
+                    <div className={classes.playerOtherInfo}>
+                        <p>DOB: {date}</p>
+                        <p>Nationality: {nationality}</p>
+                        <p>Bowling Arm: {rightArmedBowl ? "Right" : "Left"}</p>
+                        <p>Batting Hand: {rightHandedBat ? "Right" : "Left"}</p>
+                        <p>Short Name: {shortName}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <IconButton size="large" className={classes.exitIcon}>
+                <ClearRoundedIcon size="large" color="secondary" />
+            </IconButton>
+        </>
     )
 }
 
