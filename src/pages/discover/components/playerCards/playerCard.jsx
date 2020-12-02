@@ -10,6 +10,8 @@ import { darkTheme } from "../../../../components/materialTheming/materialThemin
 
 import PlayerMoreInfo from "./playerMoreInfo";
 
+import AOS from "aos";
+
 const useStyles = makeStyles((theme) =>
     createStyles({
         backdrop: {
@@ -94,7 +96,7 @@ const useStyles = makeStyles((theme) =>
     })
 );
 
-function PlayerCard({ playerInfo, stats, searching }) {
+function PlayerCard({ playerInfo, stats, searching, index }) {
     const classes = useStyles();
     const [showMorePlayerInfo, setShowMorePlayerInfo] = React.useState(false);
 
@@ -113,7 +115,7 @@ function PlayerCard({ playerInfo, stats, searching }) {
                     >
                         <PlayerMoreInfo playerInfo={playerInfo} />
                     </Backdrop>
-                    <div className={classes.playerCard} onClick={() => { setShowMorePlayerInfo(true); }}>
+                    <div className={classes.playerCard} onClick={() => { setShowMorePlayerInfo(true); }} data-aos="fade-up" data-aos-offset={-window.innerHeight * 5} data-aos-delay={index * 50}>
                         <img alt={fullName} src={`https://static.iplt20.com/players/210/${id}.png`} />
                         <div className={classes.playerInfo}>
                             <span className={classes.playerName}>{fullName}</span>

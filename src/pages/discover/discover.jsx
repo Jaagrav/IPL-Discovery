@@ -114,8 +114,8 @@ function Discover() {
       <Header teamIDQuery={query.get("teamID")} sortIDQuery={query.get("sortID")} setSearching={setSearching} />
       <div className={classes.playerCards}>
         {
-          playerCardInfo.map(item => (
-            <PlayerCard key={item.player.id} playerInfo={item.player} stats={item.stats[0]} searching={searching} />
+          playerCardInfo.map((item, index) => (
+            <PlayerCard key={item.player.id} playerInfo={item.player} stats={item.stats[0]} searching={searching} index={index} />
           ))
         }
       </div>
