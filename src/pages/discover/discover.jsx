@@ -10,8 +10,7 @@ import {
   CircularProgress,
   Backdrop,
   makeStyles,
-  createStyles,
-  Theme
+  createStyles
 } from "@material-ui/core";
 
 import PlayerCard from './components/playerCards/playerCard';
@@ -20,7 +19,7 @@ import { darkTheme } from "../../components/materialTheming/materialTheming";
 
 import { sortAlphabetically, sortMostRun, sortMostMatches, sortMostWickets } from "./components/SortingMethods";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
@@ -31,10 +30,18 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "0 12px",
       display: 'grid',
       gridGap: "10px",
-      gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))",
+      gridTemplateColumns: "repeat(auto-fill, minmax(450px, 1fr))",
       [theme.breakpoints.down("sm")]: {
-        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
       }
+    },
+    footer: {
+      padding: 20,
+      marginTop: 10,
+      textAlign: "center",
+      background: "#222A32",
+      color: "#42FB81",
+      letterSpacing: 7,
     }
   })
 );
@@ -43,9 +50,10 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-function Discover(props) {
+function Discover() {
   const classes = useStyles();
   let query = useQuery();
+  const [searching, setSearching] = React.useState("");
 
   const [loading, setLoading] = React.useState(true);
   const [forceRerender, setForceRerender] = React.useState(true);
@@ -94,7 +102,7 @@ function Discover(props) {
   }, [forceRerender]);
 
   return (
-    <div className="discover-page">
+    <div className={classes.discoverPage}>
       <ThemeProvider theme={darkTheme}>
         <Backdrop
           className={classes.backdrop}
@@ -103,14 +111,15 @@ function Discover(props) {
           <CircularProgress color="primary" />
         </Backdrop>
       </ThemeProvider>
-      <Header teamIDQuery={query.get("teamID")} sortIDQuery={query.get("sortID")} />
+      <Header teamIDQuery={query.get("teamID")} sortIDQuery={query.get("sortID")} setSearching={setSearching} />
       <div className={classes.playerCards}>
         {
           playerCardInfo.map(item => (
-            <PlayerCard key={item.player.id} playerInfo={item.player} stats={item.stats[0]} />
+            <PlayerCard key={item.player.id} playerInfo={item.player} stats={item.stats[0]} searching={searching} />
           ))
         }
       </div>
+      <div className={classes.footer}>©IPL2020</div>
     </div>
   );
 }

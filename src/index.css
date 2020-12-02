@@ -13,6 +13,7 @@ body {
 body * {
   font-family: "Montserrat", sans-serif !important;
   box-sizing: border-box;
+  -webkit-user-drag: none;
 }
 
 code {

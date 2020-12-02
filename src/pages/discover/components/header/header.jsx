@@ -12,13 +12,14 @@ import {
     FormControl,
     InputLabel,
     makeStyles,
-    createStyles,
-    Theme
+    createStyles
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { darkTheme } from "../../../../components/materialTheming/materialTheming";
 
-const useStyles = makeStyles((theme: Theme) =>
+let searchValue = "";
+
+const useStyles = makeStyles((theme) =>
     createStyles({
         header: {
             width: "100%",
@@ -106,7 +107,8 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function Header({ sortIDQuery, teamIDQuery }) {
+
+function Header({ sortIDQuery, teamIDQuery, setSearching }) {
     const classes = useStyles();
     const history = useHistory();
 
@@ -137,6 +139,7 @@ function Header({ sortIDQuery, teamIDQuery }) {
                         variant="filled"
                         className={classes.search}
                         autoComplete="off"
+                        onChange={(e) => { setSearching(e.target.value) }}
                         InputProps={{
                             endAdornment: (
                                 <IconButton>
@@ -186,4 +189,4 @@ function Header({ sortIDQuery, teamIDQuery }) {
     )
 }
 
-export default Header
+export default Header;

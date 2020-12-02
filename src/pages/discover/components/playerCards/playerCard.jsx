@@ -4,14 +4,13 @@ import {
     Backdrop,
     makeStyles,
     createStyles,
-    Theme
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { darkTheme } from "../../../../components/materialTheming/materialTheming";
 
 import PlayerMoreInfo from "./playerMoreInfo";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         backdrop: {
             zIndex: theme.zIndex.drawer + 1,
@@ -55,11 +54,12 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingBottom: "13px"
         },
         playerName: {
+            height: "fit-content",
             color: "#fff",
             fontSize: "30px",
-            [theme.breakpoints.down("sm")]: {
-                // fontSize: "17px"
-            }
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
         },
         statsPreview: {
             height: "75px",
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function PlayerCard({ playerInfo, stats }) {
+function PlayerCard({ playerInfo, stats, searching }) {
     const classes = useStyles();
     const [showMorePlayerInfo, setShowMorePlayerInfo] = React.useState(false);
 
@@ -104,36 +104,38 @@ function PlayerCard({ playerInfo, stats }) {
         const { w } = stats.bowlingStats;
 
         return (
-            <ThemeProvider theme={darkTheme}>
-                <Backdrop
-                    className={classes.backdrop}
-                    open={showMorePlayerInfo}
-                    onClick={() => { setShowMorePlayerInfo(false); }}
-                >
-                    <PlayerMoreInfo playerInfo={playerInfo} />
-                </Backdrop>
-                <div className={classes.playerCard} onClick={() => { setShowMorePlayerInfo(true); }}>
-                    <img alt={fullName} src={`https://static.iplt20.com/players/210/${id}.png`} />
-                    <div className={classes.playerInfo}>
-                        <span className={classes.playerName}>{fullName}</span>
-                        <p className={classes.year}>IPL{new Date().getFullYear()}</p>
-                        <div className={classes.statsPreview}>
-                            <div className={classes.stats}>
-                                <span>{m}</span>
-                                <p>Matches</p>
-                            </div>
-                            <div className={classes.stats}>
-                                <span>{r}</span>
-                                <p>Runs</p>
-                            </div>
-                            <div className={classes.stats}>
-                                <span>{w}</span>
-                                <p>Wickets</p>
+            fullName.toLowerCase().includes(searching.toLowerCase()) ? (
+                <ThemeProvider theme={darkTheme}>
+                    <Backdrop
+                        className={classes.backdrop}
+                        open={showMorePlayerInfo}
+                        onClick={() => { setShowMorePlayerInfo(false); }}
+                    >
+                        <PlayerMoreInfo playerInfo={playerInfo} />
+                    </Backdrop>
+                    <div className={classes.playerCard} onClick={() => { setShowMorePlayerInfo(true); }}>
+                        <img alt={fullName} src={`https://static.iplt20.com/players/210/${id}.png`} />
+                        <div className={classes.playerInfo}>
+                            <span className={classes.playerName}>{fullName}</span>
+                            <p className={classes.year}>IPL{new Date().getFullYear()}</p>
+                            <div className={classes.statsPreview}>
+                                <div className={classes.stats}>
+                                    <span>{m}</span>
+                                    <p>Matches</p>
+                                </div>
+                                <div className={classes.stats}>
+                                    <span>{r}</span>
+                                    <p>Runs</p>
+                                </div>
+                                <div className={classes.stats}>
+                                    <span>{w}</span>
+                                    <p>Wickets</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </ThemeProvider>
+                </ThemeProvider>
+            ) : ("")
         )
     } catch (e) {
         return (<></>);

@@ -1,14 +1,11 @@
 import React from 'react';
 
 import {
-    IconButton,
-
     makeStyles,
     createStyles,
-    Theme
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         playerMoreInfo: {
             background: "#222A32",
@@ -16,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
             maxHeight: "40pc",
             borderRadius: "5px",
             display: "grid",
-            gridTemplateColumns: "auto 1fr",
+            gridTemplateColumns: "291px 1fr",
         },
         playerInfo: {
             padding: "20px 30px 20px 0",

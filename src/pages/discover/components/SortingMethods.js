@@ -4,8 +4,20 @@ Used Bubble Sort for sorting, I know there are faster methods that I could
 use but just to write a more simple code, I used this method.
 
 */
+
+const filterEmptyValues = (data) => { 
+    var filteredData = [];
+    for(let i in data) {
+        if(data[i].stats.length > 0)
+        filteredData = [...filteredData, data[i]];
+    }
+    return filteredData;
+}
+
 const sortAlphabetically = (data) => {
-    let sortedArray = data;
+    let sortedArray = filterEmptyValues(data);
+
+    // console.log(sortedArray);
 
     for(var i = 0 ; i < sortedArray.length ; i++) 
         for(var j = 0 ; j < sortedArray.length - 1 ; j++) {
@@ -24,7 +36,7 @@ const sortAlphabetically = (data) => {
 }
 
 const sortMostRun = (data) => {
-    let sortedArray = data;
+    let sortedArray = filterEmptyValues(data);
 
     for(var i = 0 ; i < sortedArray.length ; i++) 
         for(var j = 0 ; j < sortedArray.length - 1 ; j++) {
@@ -38,12 +50,14 @@ const sortMostRun = (data) => {
                 // Handle errors in case of missing data
             }
         }
+        
+        // console.log(sortedArray);
     
     return sortedArray;
 }
 
 const sortMostMatches = (data) => {
-    let sortedArray = data;
+    let sortedArray = filterEmptyValues(data);
 
     for(var i = 0 ; i < sortedArray.length ; i++) 
         for(var j = 0 ; j < sortedArray.length - 1 ; j++) {
@@ -62,7 +76,7 @@ const sortMostMatches = (data) => {
 }
 
 const sortMostWickets = (data) => {
-    let sortedArray = data;
+    let sortedArray = filterEmptyValues(data);
 
     for(var i = 0 ; i < sortedArray.length ; i++) 
         for(var j = 0 ; j < sortedArray.length - 1 ; j++) {
